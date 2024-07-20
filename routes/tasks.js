@@ -20,6 +20,32 @@ router.route('/add').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// タスクの更新
+router.route('/update/:id').post((req, res) => {
+  console.log('Update request received for task ID:', req.params.id);
+  console.log('Request body:', req.body);
+
+  Task.findById(req.params.id)
+    .then(task => {
+      task.title = req.body.title;
+      task.description = req.body.description;
+
+      task.save()
+        .then(() => {
+          console.log('Task updated successfully');
+          res.json('Task updated!');
+        })
+        .catch(err => {
+          console.error('Error saving task:', err);
+          res.status(400).json('Error: ' + err);
+        });
+    })
+    .catch(err => {
+      console.error('Error finding task:', err);
+      res.status(400).json('Error: ' + err);
+    });
+});
+
 // タスクの削除
 router.route('/:id').delete((req, res) => {
   Task.findByIdAndDelete(req.params.id)

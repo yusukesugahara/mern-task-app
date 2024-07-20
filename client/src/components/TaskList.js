@@ -18,13 +18,13 @@ const TaskList = () => {
 
   const deleteTask = (id) => {
     axios.delete(`http://localhost:5000/tasks/${id}`)
-      .then(response => {
-        console.log(response.data);
-        setTasks(tasks.filter(task => task._id !== id));
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    .then(response => {
+      console.log(response.data);
+      setTasks(tasks.filter(task => task._id !== id));
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }
 
   return (

@@ -8,14 +8,12 @@ const EditTask = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/tasks/${id}`)
       .then(response => {
         setTitle(response.data.title);
         setDescription(response.data.description);
-        setCompleted(response.data.completed);
       })
       .catch(error => {
         console.error(error);
@@ -28,31 +26,40 @@ const EditTask = () => {
     const updatedTask = {
       title,
       description,
-      completed
     };
+
+    console.log('Sending update request:', updatedTask);
 
     axios.post(`http://localhost:5000/tasks/update/${id}`, updatedTask)
       .then(res => {
-        console.log(res.data);
+        console.log('Response from server:', res.data);
         navigate('/');
+      })
+      .catch(error => {
+        console.error(error);
       });
   }
 
   return (
-    <div>
+    <div className="edit-task">
       <h3>Edit Task</h3>
       <form onSubmit={onSubmit}>
         <div>
           <label>Title: </label>
-          <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} />
+          <input
+            type="text"
+            required
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </div>
         <div>
           <label>Description: </label>
-          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-        </div>
-        <div>
-          <label>Completed: </label>
-          <input type="checkbox" checked={completed} onChange={(e) => setCompleted(e.target.checked)} />
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
         </div>
         <div>
           <input type="submit" value="Update Task" />
