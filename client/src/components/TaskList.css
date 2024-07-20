@@ -1,0 +1,36 @@
+/* TaskList.css */
+
+h3 {
+  color: #343a40;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+li a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c82333;
+}

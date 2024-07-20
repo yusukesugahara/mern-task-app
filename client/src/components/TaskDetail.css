@@ -1,0 +1,20 @@
+/* TaskDetail.css */
+
+.task-detail {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.task-detail h2 {
+  color: #343a40;
+}
+
+.task-detail p {
+  font-size: 16px;
+}
+
+.task-detail .btn {
+  margin-top: 10px;
+}
