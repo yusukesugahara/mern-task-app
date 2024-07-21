@@ -12,6 +12,8 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
   const title = req.body.title;
   const description = req.body.description;
+  const deadline = req.body.deadline;
+  const priority = req.body.priority;
 
   const newTask = new Task({ title, description });
 
