@@ -5,13 +5,17 @@ import './CreateTask.css';
 const CreateTask = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [priority, setPriority] = useState('Medium');
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     const newTask = {
       title,
-      description
+      description,
+      deadline,
+      priority
     };
 
     axios.post('http://localhost:5000/tasks/add', newTask)
@@ -19,6 +23,8 @@ const CreateTask = () => {
 
     setTitle('');
     setDescription('');
+    setDeadline('');
+    setPriority('Medium');
   }
 
   return (
@@ -32,6 +38,22 @@ const CreateTask = () => {
         <div>
           <label>Description: </label>
           <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+        </div>
+        <div>
+          <label>Deadline: </label>
+          <input
+            type="date"
+            value={deadline}
+            onChange={(e) => setDeadline(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Priority: </label>
+          <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
         </div>
         <div>
           <input type="submit" value="Create Task" />
