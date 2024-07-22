@@ -15,10 +15,17 @@ router.route('/add').post((req, res) => {
   const deadline = req.body.deadline;
   const priority = req.body.priority;
 
-  const newTask = new Task({ title, description });
+  const newTask = new Task({ title, description, deadline, priority});
 
   newTask.save()
     .then(() => res.json('Task added!'))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// 特定のタスクの取得
+router.route('/:id').get((req, res) => {
+  Task.findById(req.params.id)
+    .then(task => res.json(task))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -31,6 +38,8 @@ router.route('/update/:id').post((req, res) => {
     .then(task => {
       task.title = req.body.title;
       task.description = req.body.description;
+      task.deadline = req.body.deadline;
+      task.priority = req.body.priority;
 
       task.save()
         .then(() => {
