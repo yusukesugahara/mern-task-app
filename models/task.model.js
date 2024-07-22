@@ -10,12 +10,12 @@ const taskSchema = new Schema({
     type: String,
   },
   deadline: {
-    type: Date
+    type: Date,
   },
   priority: {
     type: String,
     enum: ['Low', 'Medium', 'High'],
-    default: 'Medium'
+    default: 'Medium',
   }
 }, {
   timestamps: true,

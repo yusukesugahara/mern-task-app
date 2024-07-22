@@ -12,15 +12,17 @@ const EditTask = () => {
   const [priority, setPriority] = useState('Medium');
 
   useEffect(() => {
+    // タスクのデータを取得してステートに設定
     axios.get(`http://localhost:5000/tasks/${id}`)
       .then(response => {
-        setTitle(response.data.title);
-        setDescription(response.data.description);
-        setDeadline(response.data.deadline ? response.data.deadline.split('T')[0] : ''); // フォーマットを調整
-        setPriority(response.data.priority);
+        const task = response.data;
+        setTitle(task.title);
+        setDescription(task.description);
+        setDeadline(task.deadline ? task.deadline.split('T')[0] : ''); // フォーマットを調整
+        setPriority(task.priority);
       })
       .catch(error => {
-        console.error(error);
+        console.error('Error fetching task:', error);
       });
   }, [id]);
 
