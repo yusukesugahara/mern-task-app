@@ -11,10 +11,24 @@
   color: #343a40;
 }
 
-.task-detail p {
-  font-size: 16px;
-}
 
 .task-detail .btn {
   margin-top: 10px;
+}
+
+
+
+.task-detail table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.task-detail td {
+  padding: 8px;
+  vertical-align: top;
+}
+
+.task-detail td:first-child {
+  width: 150px;
 }

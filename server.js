@@ -10,10 +10,13 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDBの接続
-mongoose.connect('mongodb://localhost:27017/mern-task', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect('mongodb://localhost/memo-app')
+  .then(() => {
+    console.log('MongoDB connected');
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  });
 
 const connection = mongoose.connection;
 connection.once('open', () => {
