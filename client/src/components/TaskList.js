@@ -49,7 +49,7 @@ const TaskList = () => {
   const sortTasks = (type) => {
     let sortedTasks = [...tasks];
     if (type === 'priority') {
-      const priorityOrder = { 'High': 1, 'Medium': 2, 'Low': 3 };
+      const priorityOrder = { '高': 2, '中': 1, '低': 0 };
       sortedTasks.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
     } else if (type === 'deadline') {
       sortedTasks.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
@@ -74,11 +74,11 @@ const TaskList = () => {
 
   const getPriorityClass = (priority) => {
     switch (priority) {
-      case 'High':
+      case '高':
         return 'priority-high task-priority ';
-      case 'Medium':
+      case '中':
         return 'priority-medium task-priority ';
-      case 'Low':
+      case '低':
         return 'priority-low task-priority ';
       default:
         return '';
