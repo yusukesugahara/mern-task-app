@@ -4,14 +4,21 @@ h3 {
   color: #343a40;
 }
 
+.sort-buttons {
+  margin-bottom: 15px;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
 }
 
 li {
+  height: 58px;
   padding: 10px 0;
   border-bottom: 1px solid #ccc;
+  display: flex;
+  line-height: 38px;
 }
 
 li a {
@@ -23,14 +30,43 @@ li a:hover {
   text-decoration: underline;
 }
 
-button {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
+.task-priority-deadline{
+  display: flex;
+  width: 130px;
+  margin-left: 10px;
+  font-size: 0.9em;
+  color: #555;
 }
 
-button:hover {
-  background-color: #c82333;
+.task-priority{
+  display: inline-block;
+  width: 55px;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.task-title{
+  margin: 0 auto 0 10px;
+}
+
+.deadline-green {
+  color: green;
+}
+
+.deadline-red {
+  color: red;
+}
+
+.priority-high {
+  color: red;
+}
+
+.priority-medium {
+  color: orange;
+}
+
+.priority-low {
+  color: green;
 }
