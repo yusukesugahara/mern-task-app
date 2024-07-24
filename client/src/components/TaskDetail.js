@@ -17,6 +17,17 @@ const TaskDetail = () => {
       });
   }, [id]);
 
+  const completeTask = () => {
+    axios.post(`http://localhost:5000/tasks/complete/${id}`)
+      .then(response => {
+        console.log(response.data);
+        setTask(prevTask => ({ ...prevTask, completed: true }));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
   if (!task) {
     return <div>Loading...</div>;
   }
@@ -24,27 +35,14 @@ const TaskDetail = () => {
   return (
     <div className="task-detail">
       <h2>{task.title}</h2>
-      <table>
-    <tbody>
-      <tr>
-        <td><strong>Description:</strong></td>
-        <td>{task.description}</td>
-      </tr>
-      <tr>
-        <td><strong>Deadline:</strong></td>
-        <td>{task.deadline ? task.deadline.split('T')[0] : ''}</td>
-      </tr>
-      <tr>
-        <td><strong>Priority:</strong></td>
-        <td>{task.priority}</td>
-      </tr>
-      <tr>
-        <td><strong>Status:</strong></td>
-        <td>{task.completed ? 'Completed' : 'Incomplete'}</td>
-      </tr>
-    </tbody>
-  </table>
+      <p>{task.description}</p>
+      <p>Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'None'}</p>
+      <p>Priority: {task.priority}</p>
+      <p>Status: {task.completed ? 'Completed' : 'Incomplete'}</p>
       <Link to={`/edit/${task._id}`} className="btn btn-primary">Edit</Link>
+      {!task.completed && (
+        <button onClick={completeTask} className="btn btn-success" style={{ marginLeft: '10px' }}>Complete</button>
+      )}
       <Link to="/" className="btn btn-secondary" style={{ marginLeft: '10px' }}>Back</Link>
     </div>
   );

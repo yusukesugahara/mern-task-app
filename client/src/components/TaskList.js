@@ -18,13 +18,30 @@ const TaskList = () => {
 
   const deleteTask = (id) => {
     axios.delete(`http://localhost:5000/tasks/${id}`)
-    .then(response => {
-      console.log(response.data);
-      setTasks(tasks.filter(task => task._id !== id));
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(response => {
+        console.log(response.data);
+        setTasks(tasks.filter(task => task._id !== id));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  const completeTask = (id) => {
+    axios.post(`http://localhost:5000/tasks/complete/${id}`)
+      .then(response => {
+        console.log(response.data);
+        setTasks(tasks.map(task => {
+          if (task._id === id) {
+            console.log("OK")
+            task.completed = true;
+          }
+          return task;
+        }));
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   return (
@@ -32,10 +49,13 @@ const TaskList = () => {
       <h3>Task List</h3>
       <ul>
         {tasks.map(task => (
-          <li key={task._id}>
+          <li key={task._id} className={task.completed ? 'completed' : ''}>
             <Link to={`/task/${task._id}`}>{task.title}</Link>
             <Link to={`/edit/${task._id}`} className="btn btn-primary" style={{ marginLeft: '10px' }}>Edit</Link>
             <button onClick={() => deleteTask(task._id)} className="btn btn-danger" style={{ marginLeft: '10px' }}>Delete</button>
+            {!task.completed && (
+              <button onClick={() => completeTask(task._id)} className="btn btn-success" style={{ marginLeft: '10px' }}>Complete</button>
+            )}
           </li>
         ))}
       </ul>
