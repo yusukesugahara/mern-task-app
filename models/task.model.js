@@ -16,6 +16,10 @@ const taskSchema = new Schema({
     type: String,
     enum: ['Low', 'Medium', 'High'],
     default: 'Medium',
+  },
+  completed: {
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true,

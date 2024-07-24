@@ -14,8 +14,9 @@ router.route('/add').post((req, res) => {
   const description = req.body.description;
   const deadline = req.body.deadline;
   const priority = req.body.priority;
+  const completed = req.body.completed;
 
-  const newTask = new Task({ title, description, deadline, priority});
+  const newTask = new Task({ title, description, deadline, priority, completed });
 
   newTask.save()
     .then(() => res.json('Task added!'))
@@ -31,30 +32,31 @@ router.route('/:id').get((req, res) => {
 
 // タスクの更新
 router.route('/update/:id').post((req, res) => {
-  console.log('Update request received for task ID:', req.params.id);
-  console.log('Request body:', req.body);
-
   Task.findById(req.params.id)
     .then(task => {
       task.title = req.body.title;
       task.description = req.body.description;
       task.deadline = req.body.deadline;
       task.priority = req.body.priority;
+      task.completed = req.body.completed;
 
       task.save()
-        .then(() => {
-          console.log('Task updated successfully');
-          res.json('Task updated!');
-        })
-        .catch(err => {
-          console.error('Error saving task:', err);
-          res.status(400).json('Error: ' + err);
-        });
+        .then(() => res.json('Task updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
     })
-    .catch(err => {
-      console.error('Error finding task:', err);
-      res.status(400).json('Error: ' + err);
-    });
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// タスクの完了
+router.route('/complete/:id').post((req, res) => {
+  Task.findById(req.params.id)
+    .then(task => {
+      task.completed = true;
+      task.save()
+        .then(() => res.json('Task completed!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 // タスクの削除
