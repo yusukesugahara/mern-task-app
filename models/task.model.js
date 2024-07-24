@@ -13,10 +13,8 @@ const taskSchema = new Schema({
     type: Date,
   },
   priority: {
-    type: String,
-    enum: ['Low', 'Medium', 'High'],
-    default: 'Medium',
-  },
+    type: Number,
+  }, // 0: Low, 1: Medium, 2: High
   completed: {
     type: Boolean,
     default: false

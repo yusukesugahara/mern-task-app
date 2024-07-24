@@ -9,7 +9,7 @@ const EditTask = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [priority, setPriority] = useState('Medium');
+  const [priority, setPriority] = useState('1');
 
   useEffect(() => {
     // タスクのデータを取得してステートに設定
@@ -80,9 +80,9 @@ const EditTask = () => {
         <div>
           <label>Priority: </label>
           <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
+            <option value="2">高</option>
+            <option value="1">中</option>
+            <option value="0">低</option>
           </select>
         </div>
         <div>

@@ -24,7 +24,7 @@ const CreateTask = () => {
     setTitle('');
     setDescription('');
     setDeadline('');
-    setPriority('Medium');
+    setPriority('1');
   }
 
   return (
@@ -50,9 +50,9 @@ const CreateTask = () => {
         <div>
           <label>Priority: </label>
           <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
+            <option value="2">高</option>
+            <option value="1">中</option>
+            <option value="0">低</option>
           </select>
         </div>
         <div>
