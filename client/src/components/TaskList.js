@@ -19,17 +19,6 @@ const TaskList = () => {
       });
   }, []);
 
-  const deleteTask = (id) => {
-    axios.delete(`http://localhost:5000/tasks/${id}`)
-      .then(response => {
-        console.log(response.data);
-        setTasks(tasks.filter(task => task._id !== id));
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
   const completeTask = (id) => {
     axios.post(`http://localhost:5000/tasks/complete/${id}`)
       .then(response => {
@@ -37,6 +26,22 @@ const TaskList = () => {
         setTasks(tasks.map(task => {
           if (task._id === id) {
             task.completed = true;
+          }
+          return task;
+        }));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  const uncompleteTask = (id) => {
+    axios.post(`http://localhost:5000/tasks/uncomplete/${id}`)
+      .then(response => {
+        console.log(response.data);
+        setTasks(tasks.map(task => {
+          if (task._id === id) {
+            task.completed = false;
           }
           return task;
         }));
@@ -101,13 +106,14 @@ const TaskList = () => {
         </button>
       </div>
       <ul>
-        {tasks.filter(task => showCompleted ? task.completed : !task.completed).map(task => (
+      {tasks.filter(task => showCompleted ? task.completed : !task.completed).map(task => (
           <li key={task._id}>
-            {!task.completed && (
-                <button onClick={() => completeTask(task._id)} className="btn btn-success" style={{ marginLeft: '10px' }}>Complete</button>
-              )}
+            {!task.completed ? (
+              <button onClick={() => completeTask(task._id)} className="btn btn-success" style={{ marginLeft: '10px' }}>Complete</button>
+            ) : (
+              <button onClick={() => uncompleteTask(task._id)} className="btn btn-warning" style={{ marginLeft: '10px' }}>Uncomplete</button>
+            )}
             <Link to={`/edit/${task._id}`} className="btn btn-primary" style={{ marginLeft: '10px' }}>Edit</Link>
-            <button onClick={() => deleteTask(task._id)} className="btn btn-danger" style={{ marginLeft: '10px' }}>Delete</button>
             <div className='task-priority-deadline'>
               <span className={getPriorityClass(task.priority)}>
                 {task.priority}

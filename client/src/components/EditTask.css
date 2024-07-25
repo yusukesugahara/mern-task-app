@@ -25,3 +25,15 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #218838;
 }
+
+.delete-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #218838;
+}
