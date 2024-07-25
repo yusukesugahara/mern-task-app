@@ -10,6 +10,7 @@ const EditTask = () => {
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
   const [priority, setPriority] = useState('1');
+  const [completed, setCompleted] = useState();
 
   useEffect(() => {
     // タスクのデータを取得してステートに設定
@@ -20,6 +21,7 @@ const EditTask = () => {
         setDescription(task.description);
         setDeadline(task.deadline ? task.deadline.split('T')[0] : ''); // フォーマットを調整
         setPriority(task.priority);
+        setCompleted(task.completed);
       })
       .catch(error => {
         console.error('Error fetching task:', error);
@@ -49,7 +51,6 @@ const EditTask = () => {
     }
 
   const onDelete = () => {
-    console.log('ddd')
     axios.delete(`http://localhost:5000/tasks/${id}`)
       .then(res => {
         console.log('Task deleted:', res.data);
@@ -58,6 +59,44 @@ const EditTask = () => {
       .catch(error => {
         console.error('Error deleting task:', error);
       });
+    }
+
+    const completeTask = () => {
+      const updatedTask = {
+        title,
+        description,
+        deadline,
+        priority,
+        completed: true
+      };
+  
+      axios.post(`http://localhost:5000/tasks/update/${id}`, updatedTask)
+        .then(res => {
+          console.log('Task completed:', res.data);
+          setCompleted(true);
+        })
+        .catch(error => {
+          console.error('Error completing task:', error);
+        });
+    }
+  
+    const uncompleteTask = () => {
+      const updatedTask = {
+        title,
+        description,
+        deadline,
+        priority,
+        completed: false
+      };
+  
+      axios.post(`http://localhost:5000/tasks/update/${id}`, updatedTask)
+        .then(res => {
+          console.log('Task uncompleted:', res.data);
+          setCompleted(false);
+        })
+        .catch(error => {
+          console.error('Error uncompleting task:', error);
+        });
     }
 
   return (
@@ -96,6 +135,13 @@ const EditTask = () => {
             <option value="1">中</option>
             <option value="0">低</option>
           </select>
+        </div>
+        <div>
+          {!completed ? (
+            <button onClick={() => completeTask(id)} className="btn btn-success" style={{ marginLeft: '10px' }}>Complete</button>
+          ) : (
+            <button onClick={() => uncompleteTask(id)} className="btn btn-warning" style={{ marginLeft: '10px' }}>Uncomplete</button>
+          )}
         </div>
         <div>
           <input type="submit" value="Update Task" />

@@ -65,6 +65,18 @@ router.route('/complete/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// タスクの未完了状態に戻す
+router.route('/uncomplete/:id').post((req, res) => {
+  Task.findById(req.params.id)
+    .then(task => {
+      task.completed = false;
+      task.save()
+        .then(() => res.json('Task uncompleted!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // タスクの削除
 router.route('/:id').delete((req, res) => {
   Task.findByIdAndDelete(req.params.id)
