@@ -46,7 +46,19 @@ const EditTask = () => {
       .catch(error => {
         console.error(error);
       });
-  }
+    }
+
+  const onDelete = () => {
+    console.log('ddd')
+    axios.delete(`http://localhost:5000/tasks/${id}`)
+      .then(res => {
+        console.log('Task deleted:', res.data);
+        navigate('/');
+      })
+      .catch(error => {
+        console.error('Error deleting task:', error);
+      });
+    }
 
   return (
     <div className="edit-task">
@@ -87,6 +99,7 @@ const EditTask = () => {
         </div>
         <div>
           <input type="submit" value="Update Task" />
+          <button onClick={onDelete} className="delete-button" style={{ marginTop: '10px' }}>Delete Task</button>
         </div>
       </form>
     </div>

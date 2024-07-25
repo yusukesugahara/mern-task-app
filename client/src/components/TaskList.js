@@ -19,17 +19,6 @@ const TaskList = () => {
       });
   }, []);
 
-  const deleteTask = (id) => {
-    axios.delete(`http://localhost:5000/tasks/${id}`)
-      .then(response => {
-        console.log(response.data);
-        setTasks(tasks.filter(task => task._id !== id));
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
   const completeTask = (id) => {
     axios.post(`http://localhost:5000/tasks/complete/${id}`)
       .then(response => {
@@ -107,7 +96,6 @@ const TaskList = () => {
                 <button onClick={() => completeTask(task._id)} className="btn btn-success" style={{ marginLeft: '10px' }}>Complete</button>
               )}
             <Link to={`/edit/${task._id}`} className="btn btn-primary" style={{ marginLeft: '10px' }}>Edit</Link>
-            <button onClick={() => deleteTask(task._id)} className="btn btn-danger" style={{ marginLeft: '10px' }}>Delete</button>
             <div className='task-priority-deadline'>
               <span className={getPriorityClass(task.priority)}>
                 {task.priority}
