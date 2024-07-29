@@ -131,9 +131,9 @@ const EditTask = () => {
         <div>
           <label>Priority: </label>
           <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-            <option value="2">高</option>
-            <option value="1">中</option>
-            <option value="0">低</option>
+            <option value='2'>高</option>
+            <option value='1'>中</option>
+            <option value='0'>低</option>
           </select>
         </div>
         <div>

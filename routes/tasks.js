@@ -19,7 +19,7 @@ router.route('/add').post((req, res) => {
   const title = req.body.title;
   const description = req.body.description;
   const deadline = req.body.deadline;
-  const priority = req.body.priority === '高' ? 2 : req.body.priority === '中' ? 1 : 0;
+  const priority = req.body.priority === '2' ? 2 : req.body.priority === '1' ? 1 : 0;
   const completed = req.body.completed;
 
   const newTask = new Task({ title, description, deadline, priority, completed });
@@ -43,7 +43,7 @@ router.route('/update/:id').post((req, res) => {
       task.title = req.body.title;
       task.description = req.body.description;
       task.deadline = req.body.deadline;
-      task.priority = req.body.priority === '高' ? 2 : req.body.priority === '中' ? 1 : 0;
+      task.priority = req.body.priority === '2' ? 2 : req.body.priority === '1' ? 1 : 0;
       task.completed = req.body.completed;
 
       task.save()

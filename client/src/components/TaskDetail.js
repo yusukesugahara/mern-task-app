@@ -32,12 +32,43 @@ const TaskDetail = () => {
     return <div>Loading...</div>;
   }
 
+
+  const priorityTask = (priority) => {
+    console.log(priority);
+    switch (String(priority)) { // 文字列として扱うように変更
+      case '2':
+        return "高";
+      case '1':
+        return "中";
+      case '0':
+        return "低";
+      default:
+        return '';
+    }
+  }
+
+  const getPriorityClass = (priority) => {
+    switch (String(priority)) { // 文字列として扱うように変更
+      case '2':
+        return 'priority-high task-priority';
+      case '1':
+        return 'priority-medium task-priority';
+      case '0':
+        return 'priority-low task-priority';
+      default:
+        return '';
+    }
+  }
+
+
   return (
     <div className="task-detail">
       <h2>{task.title}</h2>
       <p>{task.description}</p>
       <p>Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'None'}</p>
-      <p>Priority: {task.priority}</p>
+      <p>Priority: <span className={getPriorityClass(task.priority)}>
+                {priorityTask(task.priority)}
+              </span></p>
       <p>Status: {task.completed ? 'Completed' : 'Incomplete'}</p>
       <Link to={`/edit/${task._id}`} className="btn btn-primary">Edit</Link>
       {!task.completed && (
