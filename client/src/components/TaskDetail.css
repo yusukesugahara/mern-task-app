@@ -32,3 +32,15 @@
 .task-detail td:first-child {
   width: 150px;
 }
+
+.priority-high {
+  color: red;
+}
+
+.priority-medium {
+  color: orange;
+}
+
+.priority-low {
+  color: green;
+}
