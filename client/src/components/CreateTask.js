@@ -37,7 +37,7 @@ const CreateTask = () => {
         </div>
         <div>
           <label>Description: </label>
-          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+          <input type="text-area" value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
         <div>
           <label>Deadline: </label>
