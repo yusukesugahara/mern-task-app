@@ -115,7 +115,7 @@ const EditTask = () => {
         <div>
           <label>Description: </label>
           <input
-            type="text"
+            type="text-area"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
