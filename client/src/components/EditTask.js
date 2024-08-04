@@ -104,7 +104,7 @@ const EditTask = () => {
       <h3>Edit Task</h3>
       <form onSubmit={onSubmit}>
         <div>
-          <label>Title: </label>
+          <label>タスク名: </label>
           <input
             type="text"
             required
@@ -113,7 +113,7 @@ const EditTask = () => {
           />
         </div>
         <div>
-          <label>Description: </label>
+          <label>詳細: </label>
           <input
             type="text-area"
             value={description}
@@ -121,7 +121,7 @@ const EditTask = () => {
           />
         </div>
         <div>
-          <label>Deadline: </label>
+          <label>期限: </label>
           <input
             type="date"
             value={deadline}
@@ -129,7 +129,7 @@ const EditTask = () => {
           />
         </div>
         <div>
-          <label>Priority: </label>
+          <label>優先度: </label>
           <select value={priority} onChange={(e) => setPriority(e.target.value)}>
             <option value='2'>高</option>
             <option value='1'>中</option>
