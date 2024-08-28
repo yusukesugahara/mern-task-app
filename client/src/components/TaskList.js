@@ -5,12 +5,12 @@ import './TaskList.css';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
-  const [showCompleted, setShowCompleted] = useState(false); // 完了タスクの表示を切り替えるステート
-
+  const [showCompleted, setShowCompleted] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/tasks/')
+    axios.get('/api/tasks')
       .then(response => {
+        console.log("Fetched tasks:", response.data);
         setTasks(response.data);
       })
       .catch(error => {
@@ -19,7 +19,7 @@ const TaskList = () => {
   }, []);
 
   const completeTask = (id) => {
-    axios.post(`http://localhost:5000/tasks/complete/${id}`)
+    axios.post(`/api/tasks/complete/${id}`)
       .then(response => {
         console.log(response.data);
         setTasks(tasks.map(task => {
@@ -35,7 +35,7 @@ const TaskList = () => {
   }
 
   const uncompleteTask = (id) => {
-    axios.post(`http://localhost:5000/tasks/uncomplete/${id}`)
+    axios.post(`/api/tasks/uncomplete/${id}`)
       .then(response => {
         console.log(response.data);
         setTasks(tasks.map(task => {
@@ -73,7 +73,8 @@ const TaskList = () => {
       return 'deadline-green';
     } else {
       return '';
-    }}
+    }
+  }
 
   const getPriorityClass = (priority) => {
     switch (priority) {
@@ -87,7 +88,6 @@ const TaskList = () => {
         return '';
     }
   }
-
 
   return (
     <div>
@@ -104,7 +104,7 @@ const TaskList = () => {
         </button>
       </div>
       <ul>
-      {tasks.filter(task => showCompleted ? task.completed : !task.completed).map(task => (
+        {Array.isArray(tasks) && tasks.filter(task => showCompleted ? task.completed : !task.completed).map(task => (
           <li key={task._id}>
             {!task.completed ? (
               <button onClick={() => completeTask(task._id)} className="btn btn-success" style={{ marginLeft: '10px' }}>Complete</button>
