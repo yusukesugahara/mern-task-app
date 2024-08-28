@@ -5,7 +5,6 @@ import './TaskList.css';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
-  const [sortType, setSortType] = useState(''); // 並び替えの種類を保持するステート
   const [showCompleted, setShowCompleted] = useState(false); // 完了タスクの表示を切り替えるステート
 
 
@@ -60,7 +59,6 @@ const TaskList = () => {
       sortedTasks.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
     }
     setTasks(sortedTasks);
-    setSortType(type);
   }
 
   const getDeadlineClass = (deadline) => {
