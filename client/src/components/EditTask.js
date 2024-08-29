@@ -14,7 +14,7 @@ const EditTask = () => {
 
   useEffect(() => {
     // タスクのデータを取得してステートに設定
-    axios.get(`http://localhost:5000/tasks/${id}`)
+    axios.get(`/api/tasks/${id}`)
       .then(response => {
         const task = response.data;
         setTitle(task.title);
@@ -40,7 +40,7 @@ const EditTask = () => {
 
     console.log('Sending update request:', updatedTask);
 
-    axios.post(`http://localhost:5000/tasks/update/${id}`, updatedTask)
+    axios.post(`/api/tasks/update/${id}`, updatedTask)
       .then(res => {
         console.log('Response from server:', res.data);
         navigate('/');
@@ -51,7 +51,7 @@ const EditTask = () => {
     }
 
   const onDelete = () => {
-    axios.delete(`http://localhost:5000/tasks/${id}`)
+    axios.delete(`/api/tasks/${id}`)
       .then(res => {
         console.log('Task deleted:', res.data);
         navigate('/');
@@ -70,7 +70,7 @@ const EditTask = () => {
         completed: true
       };
   
-      axios.post(`http://localhost:5000/tasks/update/${id}`, updatedTask)
+      axios.post(`/api/tasks/update/${id}`, updatedTask)
         .then(res => {
           console.log('Task completed:', res.data);
           setCompleted(true);
@@ -89,7 +89,7 @@ const EditTask = () => {
         completed: false
       };
   
-      axios.post(`http://localhost:5000/tasks/update/${id}`, updatedTask)
+      axios.post(`/api/tasks/update/${id}`, updatedTask)
         .then(res => {
           console.log('Task uncompleted:', res.data);
           setCompleted(false);

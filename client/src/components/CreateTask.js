@@ -18,7 +18,7 @@ const CreateTask = () => {
       priority
     };
 
-    axios.post('http://localhost:5000/tasks/add', newTask)
+    axios.post('/api/tasks/add', newTask)
       .then(res => console.log(res.data));
 
     setTitle('');
