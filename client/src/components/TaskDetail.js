@@ -8,7 +8,7 @@ const TaskDetail = () => {
   const [task, setTask] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/tasks/${id}`)
+    axios.get(`/api/tasks/${id}`)
       .then(response => {
         setTask(response.data);
       })
@@ -18,7 +18,7 @@ const TaskDetail = () => {
   }, [id]);
 
   const completeTask = () => {
-    axios.post(`http://localhost:5000/tasks/complete/${id}`)
+    axios.post(`/api/tasks/complete/${id}`)
       .then(response => {
         console.log(response.data);
         setTask(prevTask => ({ ...prevTask, completed: true }));
