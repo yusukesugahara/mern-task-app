@@ -32,6 +32,12 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
+// 全体のエラーハンドリングミドルウェア
+app.use((err, req, res, next) => {
+  console.error('An error occurred:', err.message);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
