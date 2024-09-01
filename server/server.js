@@ -17,9 +17,14 @@ app.use(bodyParser.json());
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('MongoDB connected');
+    // サーバーをMongoDB接続が成功した後にのみ起動
+    app.listen(PORT, () => {
+      console.log(`Server is running on port: ${PORT}`);
+    });
   })
   .catch((err) => {
     console.error('MongoDB connection error:', err);
+    process.exit(1); // 接続エラー時にプロセスを終了
   });
 
 // API ルート
@@ -36,8 +41,4 @@ app.get('*', (req, res) => {
 app.use((err, req, res, next) => {
   console.error('An error occurred:', err.message);
   res.status(500).json({ error: 'Internal Server Error' });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port: ${PORT}`);
 });
