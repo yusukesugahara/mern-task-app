@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './EditTask.css';
+import apiUrl from '../config'; 
 
 const EditTask = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const EditTask = () => {
 
   useEffect(() => {
     // タスクのデータを取得してステートに設定
-    axios.get(`/api/tasks/${id}`)
+    axios.get(`${apiUrl}/api/tasks/${id}`)
       .then(response => {
         const task = response.data;
         setTitle(task.title);
@@ -40,7 +41,7 @@ const EditTask = () => {
 
     console.log('Sending update request:', updatedTask);
 
-    axios.post(`/api/tasks/update/${id}`, updatedTask)
+    axios.post(`${apiUrl}/api/tasks/update/${id}`, updatedTask)
       .then(res => {
         console.log('Response from server:', res.data);
         navigate('/');
@@ -51,7 +52,7 @@ const EditTask = () => {
     }
 
   const onDelete = () => {
-    axios.delete(`/api/tasks/${id}`)
+    axios.delete(`${apiUrl}/api/tasks/${id}`)
       .then(res => {
         console.log('Task deleted:', res.data);
         navigate('/');
@@ -70,7 +71,7 @@ const EditTask = () => {
         completed: true
       };
   
-      axios.post(`/api/tasks/update/${id}`, updatedTask)
+      axios.post(`${apiUrl}/api/tasks/update/${id}`, updatedTask)
         .then(res => {
           console.log('Task completed:', res.data);
           setCompleted(true);
@@ -89,7 +90,7 @@ const EditTask = () => {
         completed: false
       };
   
-      axios.post(`/api/tasks/update/${id}`, updatedTask)
+      axios.post(`${apiUrl}/api/tasks/update/${id}`, updatedTask)
         .then(res => {
           console.log('Task uncompleted:', res.data);
           setCompleted(false);

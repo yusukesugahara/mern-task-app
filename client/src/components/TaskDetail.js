@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './TaskDetail.css';
+import apiUrl from '../config'; 
 
 const TaskDetail = () => {
   const { id } = useParams();
   const [task, setTask] = useState(null);
 
   useEffect(() => {
-    axios.get(`/api/tasks/${id}`)
+    axios.get(`${apiUrl}/api/tasks/${id}`)
       .then(response => {
         setTask(response.data);
       })
@@ -18,7 +19,7 @@ const TaskDetail = () => {
   }, [id]);
 
   const completeTask = () => {
-    axios.post(`/api/tasks/complete/${id}`)
+    axios.post(`${apiUrl}/api/tasks/complete/${id}`)
       .then(response => {
         console.log(response.data);
         setTask(prevTask => ({ ...prevTask, completed: true }));

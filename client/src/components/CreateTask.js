@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './CreateTask.css';
+import apiUrl from '../config'; 
 
 const CreateTask = () => {
   const [title, setTitle] = useState('');
@@ -18,7 +19,7 @@ const CreateTask = () => {
       priority
     };
 
-    axios.post('/api/tasks/add', newTask)
+    axios.post(`${apiUrl}/api/tasks/add`, newTask)
       .then(res => console.log(res.data));
 
     setTitle('');

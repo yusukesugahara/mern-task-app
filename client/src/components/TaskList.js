@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './TaskList.css';
+import apiUrl from '../config'; 
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
 
   useEffect(() => {
-    axios.get('https://mern-task-app-server.vercel.app/api/tasks')
+    axios.get(`${apiUrl}/api/tasks`)
       .then(response => {
         console.log("Fetched tasks:", response.data);
         setTasks(response.data);
@@ -19,7 +20,7 @@ const TaskList = () => {
   }, []);
 
   const completeTask = (id) => {
-    axios.post(`/api/tasks/complete/${id}`)
+    axios.post(`${apiUrl}/api/tasks/complete/${id}`)
       .then(response => {
         console.log(response.data);
         setTasks(tasks.map(task => {
@@ -35,7 +36,7 @@ const TaskList = () => {
   }
 
   const uncompleteTask = (id) => {
-    axios.post(`/api/tasks/uncomplete/${id}`)
+    axios.post(`${apiUrl}/api/tasks/uncomplete/${id}`)
       .then(response => {
         console.log(response.data);
         setTasks(tasks.map(task => {
