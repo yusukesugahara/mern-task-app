@@ -10,7 +10,9 @@ const taskRouter = require('./routes/tasks'); // tasks ルーターをインポ�
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://mern-task-app-theta.vercel.app' // フロントエンドのURLを許可
+}));
 app.use(bodyParser.json());
 
 // MongoDB 接続
