@@ -8,7 +8,7 @@ const TaskList = () => {
   const [showCompleted, setShowCompleted] = useState(false);
 
   useEffect(() => {
-    axios.get('/api/tasks')
+    axios.get('https://your-backend-app.vercel.app/api/tasks')
       .then(response => {
         console.log("Fetched tasks:", response.data);
         setTasks(response.data);
