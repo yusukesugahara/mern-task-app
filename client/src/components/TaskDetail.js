@@ -75,7 +75,7 @@ const TaskDetail = () => {
       {!task.completed && (
         <button onClick={completeTask} className="btn btn-success" style={{ marginLeft: '10px' }}>Complete</button>
       )}
-      <Link to="/" className="btn btn-secondary" style={{ marginLeft: '10px' }}>Back</Link>
+      <Link to="/" className="btn btn-secondary back-btn" style={{ marginLeft: '10px' }}>Back</Link>
     </div>
   );
 }

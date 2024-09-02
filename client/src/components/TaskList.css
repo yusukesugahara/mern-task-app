@@ -70,3 +70,12 @@ button {
 .priority-low {
   color: green;
 }
+
+@media (max-width: 600px) {
+  .btn-secondary{
+    margin-bottom:10px;
+  }
+  .task-title{
+    line-height: 1em;
+  }
+}

@@ -11,12 +11,9 @@
   color: #343a40;
 }
 
-
 .task-detail .btn {
   margin-top: 10px;
 }
-
-
 
 .task-detail table {
   width: 100%;
@@ -43,4 +40,8 @@
 
 .priority-low {
   color: green;
+}
+
+.back-btn{
+  margin-bottom:0;
 }
