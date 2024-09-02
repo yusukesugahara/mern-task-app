@@ -1,4 +1,6 @@
 "# mern-task-app"  
+URL：https://mern-task-app-theta.vercel.app/
+
 スタート方法：  
 backend start:node server.js  
 frontend start:cd client && npm start　　
