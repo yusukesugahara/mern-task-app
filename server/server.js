@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: 'https://mern-task-app-theta.vercel.app' // フロントエンドのURLを許可
+  origin: ['https://mern-task-app-theta.vercel.app', 'http://localhost:3000']
 }));
 app.use(bodyParser.json());
 

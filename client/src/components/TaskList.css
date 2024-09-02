@@ -70,3 +70,7 @@ button {
 .priority-low {
   color: green;
 }
+
+@media (max-width: 600px) {
+  
+}
