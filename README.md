@@ -8,7 +8,7 @@ frontend start:cd client && npm start　　
 
 使用技術  
 frontend: React  
-backend: Express.js、Node.js
+backend: Express.js、Node.js  
 DB: MongoDB  
 インフラ: Vercel  　
 
