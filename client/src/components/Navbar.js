@@ -6,8 +6,8 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link to="/" className="navbar-brand">Task Manager</Link>
-      <div className="collapse navbar-collapse">
-        <ul className="navbar-nav mr-auto">
+      <div className="navbar-inner">
+        <ul className="navbar-nav">
           <li className="nav-item">
             <Link to="/" className="nav-link">Tasks</Link>
           </li>
