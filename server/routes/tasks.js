@@ -1,20 +1,18 @@
 const router = require('express').Router();
-const Task = require('../models/task.model'); // モデルをインポート
+const Task = require('../models/task.model');
 
-// タスクの取得
 router.route('/').get((req, res) => {
   Task.find()
     .then(tasks => {
       const updatedTasks = tasks.map(task => ({
-        ...task._doc, // タスクオブジェクトのすべてのプロパティをコピー
-        priority: task.priority === 2 ? '高' : task.priority === 1 ? '中' : '低' // 優先度を文字列に変換
+        ...task._doc, 
+        priority: task.priority === 2 ? '高' : task.priority === 1 ? '中' : '低' 
       }));
       res.json(updatedTasks);
     })
     .catch(err => res.status(400).json({ error: 'Error: ' + err }));
 });
 
-// タスクの追加
 router.route('/add').post((req, res) => {
   const { title, description, deadline, priority, completed } = req.body;
 
@@ -31,14 +29,12 @@ router.route('/add').post((req, res) => {
     .catch(err => res.status(400).json({ error: 'Error: ' + err }));
 });
 
-// 特定のタスクの取得
 router.route('/:id').get((req, res) => {
   Task.findById(req.params.id)
     .then(task => res.json(task))
     .catch(err => res.status(400).json({ error: 'Error: ' + err }));
 });
 
-// タスクの更新
 router.route('/update/:id').post((req, res) => {
   Task.findById(req.params.id)
     .then(task => {
@@ -55,7 +51,6 @@ router.route('/update/:id').post((req, res) => {
     .catch(err => res.status(400).json({ error: 'Error: ' + err }));
 });
 
-// タスクの完了
 router.route('/complete/:id').post((req, res) => {
   Task.findById(req.params.id)
     .then(task => {
@@ -67,7 +62,6 @@ router.route('/complete/:id').post((req, res) => {
     .catch(err => res.status(400).json({ error: 'Error: ' + err }));
 });
 
-// タスクの未完了状態に戻す
 router.route('/uncomplete/:id').post((req, res) => {
   Task.findById(req.params.id)
     .then(task => {
@@ -79,7 +73,6 @@ router.route('/uncomplete/:id').post((req, res) => {
     .catch(err => res.status(400).json({ error: 'Error: ' + err }));
 });
 
-// タスクの削除
 router.route('/:id').delete((req, res) => {
   Task.findByIdAndDelete(req.params.id)
     .then(() => res.json({ message: 'Task deleted.' }))
