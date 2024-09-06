@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles.css'; // グローバルスタイルのインポート
+import './styles.css'; 
 
 import Navbar from './components/Navbar';
 import CreateTask from './components/CreateTask';

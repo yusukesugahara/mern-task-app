@@ -36,7 +36,7 @@ const TaskDetail = () => {
 
   const priorityTask = (priority) => {
     console.log(priority);
-    switch (String(priority)) { // 文字列として扱うように変更
+    switch (String(priority)) {
       case '2':
         return "高";
       case '1':
@@ -49,7 +49,7 @@ const TaskDetail = () => {
   }
 
   const getPriorityClass = (priority) => {
-    switch (String(priority)) { // 文字列として扱うように変更
+    switch (String(priority)) {
       case '2':
         return 'priority-high task-priority';
       case '1':

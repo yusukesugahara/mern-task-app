@@ -14,7 +14,6 @@ const EditTask = () => {
   const [completed, setCompleted] = useState();
 
   useEffect(() => {
-    // タスクのデータを取得してステートに設定
     axios.get(`${apiUrl}/api/tasks/${id}`)
       .then(response => {
         const task = response.data;
